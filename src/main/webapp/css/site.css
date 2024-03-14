@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+/*.flex1{*/
+/*    flex: 1 !important;*/
+/*}*/
+/*.flex3{*/
+/*    flex: 3 !important;*/
+/*}*/
