@@ -15,7 +15,7 @@
         </div>
         <div class="card-stacked">
             <div class="card-content">
-                <h4><%= item.getType() %> <b><%= item.getBrand() %> <%= item.getName() %></b> </h4>
+                <h4 ><%= item.getType() %> <b><%= item.getBrand() %> <%= item.getName() %></b> </h4>
                 <h3><span class="strike"><%= item.getOldPrice() %></span> <span class="red-text"><b><%= item.getNewPrice() %></b> ₴</span></h3>
             </div>
             <div class="card-action">
