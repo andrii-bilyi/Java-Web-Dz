@@ -176,6 +176,42 @@ function signupButtonClick(e) {
         nameInput.classList.remove("invalid");
         nameInput.classList.add("valid");
     }
+    if( emailInput.value == "" ) {
+        emailInput.classList.remove("valid");
+        emailInput.classList.add("invalid");
+        isFormValid = false ;
+    }
+    else {
+        emailInput.classList.remove("invalid");
+        emailInput.classList.add("valid");
+    }
+    if( passwordInput.value == "" ) {
+        passwordInput.classList.remove("valid");
+        passwordInput.classList.add("invalid");
+        isFormValid = false ;
+    }
+    else {
+        passwordInput.classList.remove("invalid");
+        passwordInput.classList.add("valid");
+    }
+    if( passwordInput.value == "" ) {
+        passwordInput.classList.remove("valid");
+        passwordInput.classList.add("invalid");
+        isFormValid = false ;
+    }
+    else {
+        passwordInput.classList.remove("invalid");
+        passwordInput.classList.add("valid");
+    }
+    if( repeatInput.value != passwordInput.value ) {
+        repeatInput.classList.remove("valid");
+        repeatInput.classList.add("invalid");
+        isFormValid = false ;
+    }
+    else {
+        repeatInput.classList.remove("invalid");
+        repeatInput.classList.add("valid");
+    }
 
     if( ! isFormValid ) return ;
     /// кінець валідації
@@ -193,7 +229,23 @@ function signupButtonClick(e) {
     fetch( window.location.href, { method: 'POST', body: formData } )
         .then( r => r.json() )
         .then( j => {
-            console.log(j);
+            //console.log(j);
+            if(j.meta.status === "success"){// реєстрація успішна
+                //confirm(j.message);
+                alert("Pеєстрація успішна");
+
+                // Перенаправлення на домашню сторінку
+
+                window.location.href = window.location.href.replace("/signup", "");
+                //window.location.pathname.split('/')[1];
+                //window.location = '/home' ;  // переходимо на головну сторінку
+            }
+            else { // помилка реєстрації (повідомлення - у полі message)
+                console.log(j);
+                alert( j.meta.message ) ;
+                // Перезапускаем текущую страницу
+                //window.location.reload();
+            }
             // if( j.status == 1 ) {  // реєстрація успішна
             //     alert( 'реєстрація успішна' ) ;
             //     window.location = '/' ;  // переходимо на головну сторінку
@@ -203,3 +255,5 @@ function signupButtonClick(e) {
             // }
         } ) ;
 }
+
+

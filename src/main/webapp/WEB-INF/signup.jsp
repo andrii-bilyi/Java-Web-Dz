@@ -5,8 +5,7 @@
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
-                <input id="icon_prefix" type="text" name="user-name"
-                       class="" >
+                <input id="icon_prefix" type="text" name="user-name">
                 <label for="icon_prefix">П.І.Б.</label>
                 <span class="helper-text"
                       data-error="Це необхідне поле"
@@ -14,7 +13,7 @@
             </div>
             <div class="input-field col s6">
                 <i class="material-icons prefix">mail</i>
-                <input  id="icon_email" type="tel"  name="user-email">
+                <input id="icon_email" type="email"  name="user-email">
                 <label for="icon_email">E-mail</label>
                 <span class="helper-text"
                       data-error="Це необхідне поле"
@@ -32,10 +31,10 @@
             </div>
             <div class="input-field col s6">
                 <i class="material-icons prefix">key</i>
-                <input id="icon_repeat" type="password"  name="user-repeat" inputmode="tel">
+                <input id="icon_repeat" type="password"  name="user-repeat" >
                 <label for="icon_repeat">Повтор</label>
                 <span class="helper-text"
-                      data-error="Це необхідне поле"
+                      data-error="Це необхідне поле, що повинно відповідати паролю"
                       data-success="Правильно">Повторіть пароль</span>
             </div>
         </div>
