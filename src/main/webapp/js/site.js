@@ -23,22 +23,48 @@ document.addEventListener( 'DOMContentLoaded', () => {
         "startingTop": 		'4%',	// Starting top offset
         "endingTop": 		'10%'	// Ending top offset
     });
+    checkAuth();
 });
 
+function getContext(){
+    return window.location.pathname.split('/')[1] ;
+}
 function authButtonClick(e) {
     const emailInput = document.querySelector('input[name="auth-email"]');
     if( ! emailInput ) { throw "'auth-email' not found" ; }
     const passwordInput = document.querySelector('input[name="auth-password"]');
     if( ! passwordInput ) { throw "'auth-password' not found" ; }
 
-    // console.log( emailInput.value, passwordInput.value ) ;
-    fetch(`/auth?email=${emailInput.value}&password=${passwordInput.value}`, {
-        method: 'PATCH'
+    fetch(`/${getContext()}/auth?email=${emailInput.value}&password=${passwordInput.value}`, {
+        method: 'GET'
     })
         .then( r => r.json() )
-        .then( console.log ) ;
+        .then(j => {
+            if(j.data == null || typeof j.data.token == "undefined"){
+                document.getElementById("modal-auth-message").innerText = "У вході відмовлено";
+            }
+            else {
+                //авторизація токенами передбачає їх збереження з метою подальшого використання
+                //Для того щоб токени були доступні після перезавантаження їх вміщують
+                //до постійного сховища браузера - localStorage ...
+                localStorage.setItem("auth-token", j.data.token);
+                window.location.reload();
+            }
+        })
+    //.then( console.log ) ;
 }
-
+function checkAuth() {
+    // ... при завантаженні сторінки перевіряємо наявність даних автентифікації у localStorage
+    const  authToken = localStorage.getItem("auth-token");
+    if (authToken){
+        //перевіряємо токен на валідність і одержуємо дані про користувача
+        fetch(`/${getContext()}/auth?token=${authToken}`, {
+            method: 'POST'
+        })
+            .then( r => r.json() )
+            .then(console.log);
+    }
+}
 function newProductButtonClick(e){
     // шукаємо форму - батьківській елемент кнопки (e.target)
     const productForm = e.target.closest('form') ;
@@ -236,9 +262,8 @@ function signupButtonClick(e) {
 
                 // Перенаправлення на домашню сторінку
 
-                window.location.href = window.location.href.replace("/signup", "");
-                //window.location.pathname.split('/')[1];
-                //window.location = '/home' ;  // переходимо на головну сторінку
+                //window.location.href = window.location.href.replace("/signup", "");
+                window.location = `/${getContext()}/` ;  // переходимо на головну сторінку
             }
             else { // помилка реєстрації (повідомлення - у полі message)
                 console.log(j);

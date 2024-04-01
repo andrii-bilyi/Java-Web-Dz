@@ -1,5 +1,7 @@
 package step.learning.dal.dto;
 
+import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
@@ -76,4 +78,32 @@ public class User {
     public void setDeletedDate(Date deletedDate) {
         this.deletedDate = deletedDate;
     }
+
+    //factory
+    public static User fromResultSet(ResultSet resultSet){
+        User user = new User();
+        try {
+            user.setId(UUID.fromString(resultSet.getString("user_id")));
+            user.setName(resultSet.getString("user_name"));
+            user.setEmail(resultSet.getString("user_email"));
+            user.setAvatar(resultSet.getString("user_avatar"));
+            user.setSalt(resultSet.getString("user_salt"));
+            user.setDerivedKey(resultSet.getString("user_dk"));
+            Timestamp timestamp;
+            timestamp = resultSet.getTimestamp("user_created");
+            if(timestamp != null){
+                user.setRegisteredDate(new Date(timestamp.getTime()));
+            }
+            timestamp = resultSet.getTimestamp("user_deleted");
+            if(timestamp != null){
+                user.setDeletedDate(new Date(timestamp.getTime()));
+            }
+            return user;
+        }
+        catch (Exception ex){
+            System.err.println(ex.getMessage());
+        }
+        return null;
+    }
+
 }
