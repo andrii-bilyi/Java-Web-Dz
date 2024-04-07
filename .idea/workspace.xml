@@ -10,13 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a09355ac-70d0-4676-a821-96a28416a315" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/AuthServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/MicrosoftTeams.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/dao/ProductDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/dto/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/filters/CharsetFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/ShopApiServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/ShopServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/shop.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/products/no-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/product.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/dto/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/dto/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/site.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/site.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +94,17 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Andrii\source\repos\Java-Web-Dz\src\main\webapp\img" />
+      <recent name="C:\Users\Andrii\source\repos\Java-Web-Dz\src\main\webapp\WEB-INF" />
+      <recent name="C:\Users\Andrii\source\repos\Java-Web-Dz\src\main\java\step\learning\dal\dao" />
       <recent name="C:\Users\Andrii\source\repos\Java-Web-Dz\src\main\webapp\img\avatar" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Andrii\source\repos\Java-Web-Dz\src\main\webapp" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="step.learning.dal.dao" />
+      <recent name="step.learning.servlets" />
+      <recent name="step.learning.dal.dto" />
     </key>
   </component>
   <component name="RunManager">
@@ -206,6 +221,12 @@
       <workItem from="1711800844121" duration="1234000" />
       <workItem from="1711956147909" duration="19350000" />
       <workItem from="1711992213414" duration="2000" />
+      <workItem from="1711994804047" duration="54000" />
+      <workItem from="1712002626568" duration="19000" />
+      <workItem from="1712258292035" duration="293000" />
+      <workItem from="1712399267168" duration="2733000" />
+      <workItem from="1712471853972" duration="12069000" />
+      <workItem from="1712493876301" duration="11438000" />
     </task>
     <task id="LOCAL-00001" summary="action">
       <option name="closed" value="true" />
@@ -231,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711739951071</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="dz3">
+      <option name="closed" value="true" />
+      <created>1711994822954</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1711994822954</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

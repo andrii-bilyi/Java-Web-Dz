@@ -1,4 +1,4 @@
-document.addEventListener( 'DOMContentLoaded', () => {
+﻿document.addEventListener( 'DOMContentLoaded', () => {
     // шукаємо кнопку реєстрації, якщо знаходимо - додаємо обробник
     const signupButton = document.getElementById("signup-button");
     if(signupButton) { signupButton.onclick = signupButtonClick; }
@@ -62,9 +62,114 @@ function checkAuth() {
             method: 'POST'
         })
             .then( r => r.json() )
-            .then(console.log);
+            .then(j =>{
+                if (j.meta.status == 'success'){
+                    //замінити кнопку входу на аватарку користувача
+                    document.querySelector('[data-auth="avatar"]')
+                        .innerHTML = `<img title="${j.data.name}" class="nav-avatar" src="/${getContext()}/img/avatar/${j.data.avatar}"/>`;
+                        const product = document.querySelector('[data-auth="product"]');
+                        if(product){
+                            fetch(`/${getContext()}/product.jsp`)
+                                .then(r => r.text())
+                                .then(t => {
+                                    product.innerHTML = t;
+                                    document.getElementById("add-product-button")
+                                        .addEventListener('click', addProductClick);
+                                });
+                        }
+                }
+            });
+        //.then( console.log ) ;
     }
 }
+function addProductClick(e){
+    // Збираємо дані з форми додавання продукту
+    const form = e.target.closest('form');
+    if( ! form ) { throw "Product form not found" ; }
+    const name = form.querySelector('#product-name');
+    const price = form.querySelector('#product-price');
+    const description = form.querySelector('#product-description');
+    const fileInput = form.querySelector('#product-img');
+    const productPath = form.querySelector('#product-img-path');
+    //Проводимо валідацію
+    let isFormValid = true ;
+    if (name.value.length < 3 ) {
+        name.classList.remove("valid");
+        name.classList.add("invalid");
+        isFormValid = false ;
+    }
+    else{
+        name.classList.remove("invalid");
+        name.classList.add("valid");
+    }
+
+    if (Number(price.value) <= 0 || isNaN(price.value)) {
+        price.classList.remove("valid");
+        price.classList.add("invalid");
+        isFormValid = false ;
+    }
+    else{
+        price.classList.remove("invalid");
+        price.classList.add("valid");
+    }
+
+    if (description.value.length < 10) {
+        description.classList.remove("valid");
+        description.classList.add("invalid");
+        isFormValid = false ;
+    }
+    else{
+        description.classList.remove("invalid");
+        description.classList.add("valid");
+    }
+
+    // Перевіряємо тип завантаженого зображення
+    if(productPath.value != ""){
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (!allowedTypes.includes(fileInput.files[0].type)) {
+            productPath.classList.remove("valid");
+            productPath.classList.add("invalid");
+            isFormValid = false ;
+        }
+        else{
+            productPath.classList.remove("invalid");
+            productPath.classList.add("valid");
+        }
+    }
+
+    if( ! isFormValid ) return ;
+
+    //Формуємо дані для передачі на сервер
+    const formData = new FormData();
+    formData.append("name", name.value.trim());
+    formData.append("price", price.value);
+    formData.append("description", description.value.trim());
+    formData.append("image", fileInput.files[0]);
+    formData.append("token", localStorage.getItem("auth-token"));
+    //надсилаємо на сервер
+    fetch(`/${getContext()}/shop-api`, {
+        method: 'POST',
+        body: formData
+    })
+        .then( r => r.json() )
+        .then( j => {
+            //console.log(j);
+            if(j.meta.status === "success"){// реєстрація успішна
+                //confirm(j.message);
+                alert("Товар успішно добавлено");
+                // Перезапускаем текущую страницу
+                window.location.reload();
+            }
+            else { // помилка реєстрації (повідомлення - у полі message)
+                //console.log(j);
+                if(j.meta.message === "Invalid token"){
+                    alert( "Помилка! Відсутня авторизація або недостатньо прав" ) ;
+                    window.location = `/${getContext()}/` ;  // переходимо на головну сторінку
+                }
+            }
+        });
+}
+
 function newProductButtonClick(e){
     // шукаємо форму - батьківській елемент кнопки (e.target)
     const productForm = e.target.closest('form') ;
