@@ -47,7 +47,7 @@ public class UserDao {
                 String token = UUID.randomUUID().toString();
                 prep.setString(1, token);
                 prep.setString(2, user.getId().toString());
-                prep.setTimestamp(3, new Timestamp(new java.util.Date().getTime() + 60 * 5 * 1000)); // + 5 хв
+                prep.setTimestamp(3, new Timestamp(new java.util.Date().getTime() + 60 * 10 * 1000)); // + 5 хв
                 prep.executeUpdate();
                 return token;
             }
@@ -102,7 +102,7 @@ public class UserDao {
                     Timestamp currentExpiration = resultSet.getTimestamp("token_expires");
                     long currentExpirationTime = currentExpiration.getTime();
                     // Передбачаємо, що стандартний термін дії - 5 хвилин
-                    long extendedTime = currentExpirationTime + (5 * 60 * 1000/2); // Подовження на половину терміну
+                    long extendedTime = currentExpirationTime + (10 * 60 * 1000/2); // Подовження на половину терміну
                     Timestamp newExpirationTime = new Timestamp(extendedTime);
                     String updateSql = "UPDATE Tokens SET token_expires = ? WHERE token_id = ?";
                     try (PreparedStatement updatePrep = dbService.getConnection().prepareStatement(updateSql)) {

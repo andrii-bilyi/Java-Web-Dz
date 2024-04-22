@@ -17,9 +17,18 @@ main {
     border-radius: 50%;
     margin: 10px 0;
 }
+
+.product-cart-btn{
+    bottom: 7px !important;
+    right: 7px !important;
+}
 /*.flex1{*/
 /*    flex: 1 !important;*/
 /*}*/
 /*.flex3{*/
 /*    flex: 3 !important;*/
 /*}*/
+
+.card.small .card-image+.card-content,.card.medium .card-image+.card-content,.card.large .card-image+.card-content {
+    max-height: 50%;
+}

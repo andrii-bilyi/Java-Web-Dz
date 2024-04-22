@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.apache.commons.fileupload.FileItem;
+import step.learning.dal.dao.CartDao;
 import step.learning.dal.dao.ProductDao;
 import step.learning.dal.dao.UserDao;
 import step.learning.dal.dto.Product;
@@ -26,12 +27,14 @@ import java.util.UUID;
 public class ShopApiServlet extends HttpServlet {
     private final FormParseService formParseService;
     private final ProductDao productDao;
+    private final CartDao cartDao;
     private final UserDao userDao;
 
     @Inject
-    public ShopApiServlet(FormParseService formParseService, ProductDao productDao, UserDao userDao) {
+    public ShopApiServlet(FormParseService formParseService, ProductDao productDao, CartDao cartDao, UserDao userDao) {
         this.formParseService = formParseService;
         this.productDao = productDao;
+        this.cartDao = cartDao;
         this.userDao = userDao;
     }
 
@@ -110,6 +113,22 @@ public class ShopApiServlet extends HttpServlet {
 
         }
     }
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userId = req.getParameter("user-id");
+        if( userId == null || userId.isEmpty() ) {
+            sendRest( resp, "error", "Property 'userId' required", null ) ;
+            return ;
+        }
+        String productId = req.getParameter("product-id");
+        if( productId == null || productId.isEmpty() ) {
+            sendRest( resp, "error", "Property 'productId' required", null ) ;
+            return ;
+        }
+        cartDao.add(userId, productId, 1);
+        sendRest(resp, "success", "Cart item added", null );
+    }
+
     private void sendRest(HttpServletResponse resp, String status, String message, Object data) throws IOException {
         JsonObject rest = new JsonObject();
         JsonObject meta = new JsonObject();

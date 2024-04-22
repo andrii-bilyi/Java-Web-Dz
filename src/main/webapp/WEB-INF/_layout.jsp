@@ -29,7 +29,7 @@
                 <li><a title="Шопінг" href="<%=context%>/shop"><i class="material-icons">storefront</i></a></li>
                 <li data-auth="avatar"><a title="Вхід" href="#auth-modal" class="modal-trigger"><i class="material-icons">key</i></a></li><!-- Modal Trigger -->
                 <li><a title="Додати товар" href="<%=context%>/new-product"><i class="material-icons">inventory</i></a></li>
-                <li><a title="Кошик"  href="<%=context%>/cart"><i class="material-icons prefix">shopping_cart</i></a></li>
+                <li><a title="Кошик" href="<%=context%>/cart"><i class="material-icons prefix">shopping_cart</i></a></li>
             </ul>
         </div>
     </nav>
